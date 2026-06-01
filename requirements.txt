@@ -10,5 +10,8 @@ beautifulsoup4>=4.12.0
 lxml>=4.9.0
 plotly
 imagehash
-orjson==3.10.3
+opencv-python-headless
+st-styled
+orjson
 polars>=1.0.0
+sentence-transformers>=2.2.2
