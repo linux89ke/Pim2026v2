@@ -237,6 +237,10 @@ def standardize_input_data(df: pd.DataFrame) -> pd.DataFrame:
         col_lower = col.lower()
         renamed[col] = map_lower[col_lower] if col_lower in map_lower else col.upper()
     df = df.rename(columns=renamed)
+    
+    # 👇 FIX ADDED HERE: Drop any duplicate columns created by the rename step 👇
+    df = df.loc[:, ~df.columns.duplicated(keep='first')]
+
     # dtype=str is already set at read time in _detect_and_read_csv; .astype(str) is
     # still applied here as a safety net for DataFrames produced by other paths
     for col in ['ACTIVE_STATUS_COUNTRY', 'CATEGORY_CODE', 'BRAND', 'TAX_CLASS', 'NAME', 'SELLER_NAME']:
